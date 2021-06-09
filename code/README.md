@@ -1,28 +1,29 @@
 
-# Retinaģ��������
-����RetinaNetĿ�����㷨����������       
-������Edge��Surface���õ�Ŀ�����㷨��ͬ���ʵ���ģ�ͽ��������Ĵ����ǿ���ͨ�õģ�ֻ��ģ���ļ���index�ļ���ͬ��       
+# Retina模型推理：
+用于RetinaNet目标检测算法的推理代码       
+【由于Edge与Surface采用的目标检测算法相同，故调用模型进行推理的代码是可以通用的，只有模型文件和index文件不同】       
        
-## Surface������ˮ��ƽ̨ͼ�������
-- mark_detection.py����test_data�ļ��ж�ȡͼƬ����������Ľ��ͼƬ������output�ļ���       
-- index���涨Ŀ������Ŀ���ͺ�����       
-- client.py��������ˮ��ƽ̨��������ͷ��ȡͼ�񣬴����server������ȡ�ش���Ŀ������       
-- server.py�������ڰ��߻�վ�����մ�client����ͼ�����ݲ����浽���أ�������ģ�ͽ���Ŀ���������������������json��ʽ�ش�       
-- convert-6194-retina.om�����߻����ģ���ļ�       
-- �����ļ�������ģ�������ı�Ҫ�ļ�       
+## Surface：用于水面平台图像的推理
+- mark_detection.py：从test_data文件夹读取图片，将推理后的结果图片保存至output文件夹       
+- index：规定目标检测项目类型和名称       
+- client.py：运行于水面平台，从摄像头读取图像，传输给server，并获取回传的目标检测结果       
+- server.py：运行于岸边基站，接收从client来的图像数据并保存到本地，随后调用模型进行目标检测推理，将推理结果以json格式回传       
+- convert-6194-retina.om：离线化后的模型文件       
+- 其他文件：调用模型推理的必要文件       
        
-## Edge�����ڰ��߻�վͼ�������
-mark_detection.py��index����������Yolo����ͬ       
-- edge-retinamk1-asend.om�����߻����ģ���ļ�       
-- �����ļ�������ģ�������ı�Ҫ�ļ�       
-       
-# ִ�����̣�
-�ڰ��߻�վ��    
-1.ִ��Surface�ļ������server.py�����������      
-2.ִ�С������0ȡͼƬ���ļ������main.py����ȡ���߻�վ����ͷ�����ͼƬ�����浽���أ����ִ��Edge�ļ������mark_detection.py����������     
+## Edge：用于岸边基站图像的推理
+mark_detection.py与index作用与上述Yolo的相同       
+- edge-retinamk1-asend.om：离线化后的模型文件       
+- 其他文件：调用模型推理的必要文件       
+      
+### 注：因模型文件太大，请单独从release里下载  
+# 执行流程：
+在岸边基站：    
+1.执行Surface文件夹里的server.py，启动服务端      
+2.执行【摄像机0取图片】文件夹里的main.py，获取岸边基站摄像头拍摄的图片并保存到本地，随后执行Edge文件夹里的mark_detection.py进行推理。     
         
-��ˮ��ƽ̨��       
-ִ��Surface�ļ������client.py������ͼ�񵽰��߻�վ������ȡ�Ӱ��߻�վ�ش���Ŀ������    
+在水面平台：       
+执行Surface文件夹里的client.py，传输图像到岸边基站，并获取从岸边基站回传的目标检测结果    
 
 
  
