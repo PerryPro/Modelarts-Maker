@@ -12,7 +12,7 @@
 - 其他文件：调用模型推理的必要文件       
        
 ## Edge：用于岸边基站图像的推理
-mark_detection.py与index作用与上述Yolo的相同       
+mark_detection.py与index作用与上述的相同       
 - edge-retinamk1-asend.om：离线化后的模型文件       
 - 其他文件：调用模型推理的必要文件       
       
